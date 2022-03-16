@@ -33,7 +33,7 @@ Aon Solutions utiliza un sistema de identificadores de sesión para autorizar a 
 
 | Name |  Type  | Description |
 |------|--------|-------------|
-| email | string | Cuenta de correo registrada en Aon Solutions |
+| username | string | Cuenta de correo registrada en Aon Solutions |
 | password | string | Contraseña utilizada en el registro de Aon Solutions |
 
 Si el usuario no utiliza este identificador, el servicio devolverá el error “Unauthorized” y se deberá volver a identificar para seguir haciendo uso de los servicios.
