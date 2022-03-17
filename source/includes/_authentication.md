@@ -10,7 +10,7 @@ curl --request POST "https://aon.solutions/ms/api/login"
 ```
 ```json
 {
-  "email":"xxx@xxx.xxx",
+  "usermane":"xxx@xxx.xxx",
   "password":"xxx"
 }
 ```
