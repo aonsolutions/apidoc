@@ -320,10 +320,16 @@
             <a href="#autenticacion" class="toc-h1 toc-link" data-title="Autenticación">Autenticación</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                    <a href="#login" class="toc-h2 toc-link" data-title="Login">Login</a>
                   </li>
                   <li>
-                    <a href="#parametros" class="toc-h2 toc-link" data-title="Parámetros">Parámetros</a>
+                    <a href="#obtener-datos-del-usuario-autenticado" class="toc-h2 toc-link" data-title="Obtener datos del usuario autenticado">Obtener datos del usuario autenticado</a>
+                  </li>
+                  <li>
+                    <a href="#cambiar-contrasena-del-usuario-autenticado" class="toc-h2 toc-link" data-title="Cambiar contraseña del usuario autenticado">Cambiar contraseña del usuario autenticado</a>
+                  </li>
+                  <li>
+                    <a href="#subir-una-imagen-como-avatar-del-usuario-autenticado" class="toc-h2 toc-link" data-title="Subir una imagen como avatar del usuario autenticado">Subir una imagen como avatar del usuario autenticado</a>
                   </li>
               </ul>
           </li>
@@ -365,7 +371,7 @@
 <p>¡Bienvenido a la API de Aon Solutions!</p>
 
 <p>La API de Aon Solutions está estructurada siguiendo los fundamentos de una API RESTful. Todas las respuestas, incluyendo las respuestas de errores, devuelven un JSON. En este documento podrás encontrar los diferentes servicios que ofrecemos para visualizar y gestionar las principales entidades de Aon Solutions.</p>
-<h1 id='autenticacion'>Autenticación</h1>
+<h1 id='autenticacion'>Autenticación</h1><h2 id='login'>Login</h2>
 <blockquote>
 <p>Para autenticarse, debes hacerlo con la siguiente llamada al servicio web:</p>
 </blockquote>
@@ -411,6 +417,131 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 <p>Si el usuario no utiliza este identificador, el servicio devolverá el error “Unauthorized” y se deberá volver a identificar para seguir haciendo uso de los servicios.</p>
 
 <aside class="notice">Se necesita el valor de session_id para cualquier otra llamada a la API de Aon Solutions.</aside>
+<h2 id='obtener-datos-del-usuario-autenticado'>Obtener datos del usuario autenticado</h2>
+<blockquote>
+<p>Ejemplo de llamada al servicio “Obtener datos del usuario autenticado”:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/auth"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span>
+</code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="s2">"aaaa@aaaa.aa"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"aaaa"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"surname"</span><span class="p">:</span><span class="s2">"bbbb"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXXXXXX"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"666666666"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image url"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/auth</code></p>
+<h3 id='http-request-header'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>session_id</td>
+<td>string</td>
+<td>Token de autenticación del usuario.</td>
+</tr>
+</tbody></table>
+<h2 id='cambiar-contrasena-del-usuario-autenticado'>Cambiar contraseña del usuario autenticado</h2>
+<blockquote>
+<p>Ejemplo de llamada al servicio “Cambiar contraseña del usuario autenticado”:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> PUT <span class="s2">"https://aon.solutions/ms/api/auth/password"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"oldPassword"</span><span class="p">:</span><span class="s2">"xxxxx"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"newPassword"</span><span class="p">:</span><span class="s2">"yyyyy"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>PUT https://aon.solutions/ms/api/auth/password</code></p>
+<h3 id='http-request-header-2'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>session_id</td>
+<td>string</td>
+<td>Token de autenticación del usuario.</td>
+</tr>
+</tbody></table>
+<h3 id='parametros-2'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oldPassword</td>
+<td>string</td>
+<td>Contraseña actual utilizada en el registro de Aon Solutions</td>
+</tr>
+<tr>
+<td>newPassword</td>
+<td>string</td>
+<td>Nueva contraseña que se utilizará en el registro de Aon Solutions</td>
+</tr>
+</tbody></table>
+<h2 id='subir-una-imagen-como-avatar-del-usuario-autenticado'>Subir una imagen como avatar del usuario autenticado</h2>
+<blockquote>
+<p>Ejemplo de llamada al servicio “Subir una imagen como avatar del usuario autenticado”:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--request</span> PUT <span class="s2">"https://aon.solutions/ms/api/auth/avatar"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"content"</span><span class="p">:</span><span class="s2">"xxxxx"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">base</span><span class="mi">64</span><span class="w">
+  </span><span class="nl">"contentType"</span><span class="p">:</span><span class="s2">"Tipo de archivo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://aon.solutions/ms/api/auth/avatar</code></p>
+<h3 id='http-request-header-3'>HTTP Request Header</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>session_id</td>
+<td>string</td>
+<td>Token de autenticación del usuario.</td>
+</tr>
+</tbody></table>
+<h3 id='parametros-3'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>Imagen que se utilizará como avatar del usuario en formato base64.</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>string</td>
+<td>Tipo de archivo.</td>
+</tr>
+</tbody></table>
 <h1 id='contabilidad'>Contabilidad</h1>
 <p>Aon Solutions dispone de diferentes métodos para obtener datos sobre la contabilidad de la empresa:</p>
 <h2 id='obtener-los-periodos-contables'>Obtener los períodos contables</h2>
