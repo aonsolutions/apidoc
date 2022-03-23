@@ -10,6 +10,8 @@ toc_footers:
 
 includes:
   - authentication
+  - accounting
+  - laboral
 
 search: true
 
