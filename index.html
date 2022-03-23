@@ -327,6 +327,31 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#contabilidad" class="toc-h1 toc-link" data-title="Contabilidad">Contabilidad</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#obtener-los-periodos-contables" class="toc-h2 toc-link" data-title="Obtener los períodos contables">Obtener los períodos contables</a>
+                  </li>
+                  <li>
+                    <a href="#obtener-las-cuentas-contables" class="toc-h2 toc-link" data-title="Obtener las cuentas contables">Obtener las cuentas contables</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#laboral" class="toc-h1 toc-link" data-title="Laboral">Laboral</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#obtener-nomina" class="toc-h2 toc-link" data-title="Obtener nómina">Obtener nómina</a>
+                  </li>
+                  <li>
+                    <a href="#obtener-empleados-por-centro-de-trabajo" class="toc-h2 toc-link" data-title="Obtener empleados por centro de trabajo">Obtener empleados por centro de trabajo</a>
+                  </li>
+                  <li>
+                    <a href="#obtener-nominas-por-fecha" class="toc-h2 toc-link" data-title="Obtener nóminas por fecha">Obtener nóminas por fecha</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Contacta con Aon Solutions en </a></li>
@@ -386,6 +411,629 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 <p>Si el usuario no utiliza este identificador, el servicio devolverá el error “Unauthorized” y se deberá volver a identificar para seguir haciendo uso de los servicios.</p>
 
 <aside class="notice">Se necesita el valor de session_id para cualquier otra llamada a la API de Aon Solutions.</aside>
+<h1 id='contabilidad'>Contabilidad</h1>
+<p>Aon Solutions dispone de diferentes métodos para obtener datos sobre la contabilidad de la empresa:</p>
+<h2 id='obtener-los-periodos-contables'>Obtener los períodos contables</h2>
+<p>Obtención de todos los períodos contables disponibles para la empresa.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'periods' es una llamada POST</span>
+curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/accounting/periods"</span>
+  <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"domainName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"empresa.aonsolutions.net"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"initiationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/01/2022"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11090</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deadline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31/12/2022"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"initiationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/01/2021"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5518</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deadline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31/12/2021"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">  
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://aon.solutions/ms/api/accounting/periods</code></p>
+<h3 id='parametros'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio de la empresa</td>
+</tr>
+<tr>
+<td>domainName</td>
+<td>string</td>
+<td>Nombre del dominio de la empreasa</td>
+</tr>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>Nombre de usuario</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>initiationDate</td>
+<td>date</td>
+<td>Fecha de inicio del período (dd/MM/yyyy)</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio de la empresa</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Nombre del período</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador del período</td>
+</tr>
+<tr>
+<td>deadLine</td>
+<td>date</td>
+<td>Fecha de fin del período (dd/MM/yyyy)</td>
+</tr>
+<tr>
+<td>status</td>
+<td>number</td>
+<td>Estado del período:<br/>&nbsp;0: Activo<br/>&nbsp;1: Inactivo<br/>&nbsp;2: Apertura<br/>&nbsp;3: Explotación<br/>&nbsp;4: Cerrado</td>
+</tr>
+</tbody></table>
+<h2 id='obtener-las-cuentas-contables'>Obtener las cuentas contables</h2>
+<p>Obtención de todos los períodos contables de la contabilidad de la empresa en un período determinado.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'pyg' es una llamada POST</span>
+curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/accounting/pyg"</span>
+  <span class="nt">--data</span>
+</code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"intervals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"fromDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/01/2022"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"toDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31/01/2022"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/2022"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"statements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"salesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"expensesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20221"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"increasePercent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"debit"</span><span class="p">:</span><span class="w"> </span><span class="mf">13191.809999999983</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"credit"</span><span class="p">:</span><span class="w"> </span><span class="mf">466639.59000006545</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7050"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prestación de servicios."</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">816</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"purchasesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"salesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"expensesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20221"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"increasePercent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"debit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"credit"</span><span class="p">:</span><span class="w"> </span><span class="mf">1504.9500000000003</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7053"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Empresas del grupo"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">50951</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"purchasesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"fromDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/02/2022"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"toDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"28/02/2022"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02/2022"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"statements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"salesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"expensesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"month"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20222"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"increasePercent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"debit"</span><span class="p">:</span><span class="w"> </span><span class="mf">9207.289999999997</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"credit"</span><span class="p">:</span><span class="w"> </span><span class="mf">447784.50000006164</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7050"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prestación de servicios."</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">816</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nl">"purchasesRatio"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7050"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prestación de servicios."</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">816</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7053"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Empresas del grupo"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">50951</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"surcharge"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ledgerUnpaidBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reverseOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hideDateTimeOnFooter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"selectedPeriod"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"initiationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/01/2022"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11090</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deadline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31/12/2022"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"noActivityAccountVisible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"percentsEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"operatingEntriesExcluded"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ledgerDebitBalance"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pageOffset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"accrualRegime"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closingEntriesExcluded"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"breakdownEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"lowLevelAccountVisible"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"openingEntriesExcluded"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"farmerRegime"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"period"</span><span class="p">:</span><span class="w"> </span><span class="mi">11090</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31/12/2022"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"byMonth"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"investment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"noBalanceAccountExcluded"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"consolidation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01/01/2022"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"previousPeriods"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"service"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domainName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b72384936-ayudat.aonsolutions.net"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"showCover"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hideFilter"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://aon.solutions/ms/api/accounting/pyg</code></p>
+<h3 id='parametros-2'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio de la empresa</td>
+</tr>
+<tr>
+<td>domainName</td>
+<td>string</td>
+<td>Nombre del dominio de la empreasa</td>
+</tr>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>Nombre de usuario</td>
+</tr>
+<tr>
+<td>level</td>
+<td>number</td>
+<td>Nivel de detalle (posibles:[1,2,3,4,5,9])</td>
+</tr>
+<tr>
+<td>byMonth</td>
+<td>boolean</td>
+<td>Agrupado por meses</td>
+</tr>
+<tr>
+<td>period</td>
+<td>number</td>
+<td>Identificador del período</td>
+</tr>
+<tr>
+<td>fromDate</td>
+<td>date</td>
+<td>Fecha desde (dd/MM/yyyy)</td>
+</tr>
+<tr>
+<td>toDate</td>
+<td>date</td>
+<td>Fecha hasta (dd/MM/yyyy)</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-2'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>intervals</td>
+<td>jsonArray</td>
+<td>Array de objetos que contienen el intervalo y un array con todos los movimientos correspondientes</td>
+</tr>
+<tr>
+<td>accounts</td>
+<td>jsonArray</td>
+<td>Array de las cuentas contables del período seleccionado</td>
+</tr>
+<tr>
+<td>params</td>
+<td>json</td>
+<td>Los parámetros con los que se ha llamado a la función</td>
+</tr>
+</tbody></table>
+<h1 id='laboral'>Laboral</h1>
+<p>Métodos para la obtención de documentos de carácter laboral como recibos salariales.</p>
+<h2 id='obtener-nomina'>Obtener nómina</h2>
+<p>Obtención del una nómina en PDF.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'contract/salary/pdf' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/salary/pdf"</span>
+  <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"salaryId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"enterpriseId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SETTLE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/contract/salary/pdf</code></p>
+<h3 id='parametros'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>salaryId</td>
+<td>number</td>
+<td>Identificador del recibo salarial</td>
+</tr>
+<tr>
+<td>enterpriseId</td>
+<td>number</td>
+<td>Identificador de la empresa</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de nómina</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta'>Respuesta</h3>
+<p>El PDF de la nómina pasada por parámetros</p>
+<h2 id='obtener-empleados-por-centro-de-trabajo'>Obtener empleados por centro de trabajo</h2>
+<p>Obtención del una nómina en PDF.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'contract/employee/workplace' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/employee/workplace"</span>
+  <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"workplace"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"allEmployees"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"surName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DÍAZ"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678J"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"secondSurName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE VIVAR"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contractId"</span><span class="p">:</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RODRIGO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ssNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111088888888"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"employeeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">288</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payMethodTypeB"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"surName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DAIMAOH"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87654321Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"secondSurName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VÁSQUEZ"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contractId"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PICCOLO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ssNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111077777777"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"employeeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">289</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payMethodTypeB"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">  
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/contract/employee/workplace</code></p>
+<h3 id='parametros-2'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>workplace</td>
+<td>number</td>
+<td>Identificador del centro de trabajo</td>
+</tr>
+<tr>
+<td>allEmployees</td>
+<td>boolean</td>
+<td>Obtener todos los empleados (true) o solo aquellos cuyo contrato no haya acabado o lo haya hecho en los últimos dos meses</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-2'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nationality</td>
+<td>string</td>
+<td>Nacionalidad del empleado</td>
+</tr>
+<tr>
+<td>surName</td>
+<td>string</td>
+<td>Primer apellido</td>
+</tr>
+<tr>
+<td>documentType</td>
+<td>number</td>
+<td>Tipo de documento</td>
+</tr>
+<tr>
+<td>document</td>
+<td>string</td>
+<td>Número de documento</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio</td>
+</tr>
+<tr>
+<td>secondSurName</td>
+<td>string</td>
+<td>Segundo apellido</td>
+</tr>
+<tr>
+<td>contractId</td>
+<td>number</td>
+<td>Identificador del contrato</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Nombre del empleado</td>
+</tr>
+<tr>
+<td>ssNumber</td>
+<td>string</td>
+<td>Número de la Seguridad Social</td>
+</tr>
+<tr>
+<td>employeeId</td>
+<td>number</td>
+<td>Identificador del empleado</td>
+</tr>
+<tr>
+<td>payMethodTypeB</td>
+<td>number</td>
+<td>Método de pago</td>
+</tr>
+</tbody></table>
+<h2 id='obtener-nominas-por-fecha'>Obtener nóminas por fecha</h2>
+<p>Obtención de nóminas por fecha de fin de las mismas.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'contract/enterprise/salaries' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/enterprise/salaries"</span>
+  <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-12-31"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"employeeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE LEZO Y OLAVARRIETA, BLAS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-24"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"workplaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAVAL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SETTLE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPayment"</span><span class="p">:</span><span class="w"> </span><span class="mf">199.18</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalDeduction"</span><span class="p">:</span><span class="w"> </span><span class="mf">16.63</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"workplaceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1123</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enterpriseId"</span><span class="p">:</span><span class="w"> </span><span class="mi">804414</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalLiquid"</span><span class="p">:</span><span class="w"> </span><span class="mf">182.55</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enterpriseName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMPRESA S.L."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-18"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"employeeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BOLSÓN, FRODO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-16"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="mi">11111</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"workplaceName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MORDOR"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALARY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPayment"</span><span class="p">:</span><span class="w"> </span><span class="mf">750.85</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalDeduction"</span><span class="p">:</span><span class="w"> </span><span class="mf">62.7</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"workplaceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2222</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enterpriseId"</span><span class="p">:</span><span class="w"> </span><span class="mi">33333</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">200001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalLiquid"</span><span class="p">:</span><span class="w"> </span><span class="mf">688.15</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enterpriseName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPAÑÍA DEL ANILLO S.L."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-01"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">  
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/contract/enterprise/salaries</code></p>
+<h3 id='parametros-3'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startDate</td>
+<td>date</td>
+<td>Fecha desde (dd-MM-yyyy)</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>date</td>
+<td>Fecha hasta (dd-MM-yyyy)</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-3'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>employeeName</td>
+<td>string</td>
+<td>Nombre completo del empleado</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>date</td>
+<td>Fecha de fin de la nómina (dd-MM-yyyy)</td>
+</tr>
+<tr>
+<td>contract</td>
+<td>number</td>
+<td>Identificador del contrato</td>
+</tr>
+<tr>
+<td>workplaceName</td>
+<td>string</td>
+<td>Nombre del centro de trabajo</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de nómina</td>
+</tr>
+<tr>
+<td>totalPayment</td>
+<td>number</td>
+<td>Total devengado</td>
+</tr>
+<tr>
+<td>totalDeduction</td>
+<td>number</td>
+<td>Total a deducir</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio</td>
+</tr>
+<tr>
+<td>workplaceId</td>
+<td>number</td>
+<td>Identificador del centro de trabajo</td>
+</tr>
+<tr>
+<td>enterpriseId</td>
+<td>number</td>
+<td>Identificador de la empresa</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la nómina</td>
+</tr>
+<tr>
+<td>totalLiquid</td>
+<td>number</td>
+<td>Líquido total</td>
+</tr>
+<tr>
+<td>enterpriseName</td>
+<td>string</td>
+<td>Nombre de la empresa</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>date</td>
+<td>Fecha de inicio de la nómina (dd-MM-yyyy)</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
