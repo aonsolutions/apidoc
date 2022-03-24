@@ -8,7 +8,7 @@ Obtención de todos los períodos contables disponibles para la empresa.
 
 # El servicio 'periods' es una llamada POST
 curl --request POST "https://aon.solutions/ms/api/accounting/periods"
-  --data
+ -H "session_id:YOURSESSIONID" --data
 ```
 ```json
 {
@@ -71,7 +71,7 @@ Obtención de todos los períodos contables de la contabilidad de la empresa en 
 
 # El servicio 'pyg' es una llamada POST
 curl --request POST "https://aon.solutions/ms/api/accounting/pyg"
-  --data
+ -H "session_id:YOURSESSIONID" --data
 ```
 
 > Ejemplo de JSON de respuesta:
