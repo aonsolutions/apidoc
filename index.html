@@ -356,6 +356,12 @@
                   <li>
                     <a href="#obtener-nominas-por-fecha" class="toc-h2 toc-link" data-title="Obtener nóminas por fecha">Obtener nóminas por fecha</a>
                   </li>
+                  <li>
+                    <a href="#obtener-costes" class="toc-h2 toc-link" data-title="Obtener costes">Obtener costes</a>
+                  </li>
+                  <li>
+                    <a href="#obtener-hoja-de-calculo-de-costes" class="toc-h2 toc-link" data-title="Obtener hoja de cálculo de costes">Obtener hoja de cálculo de costes</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -549,7 +555,7 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'periods' es una llamada POST</span>
 curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/accounting/periods"</span>
-  <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"domain"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"domainName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"empresa.aonsolutions.net"</span><span class="p">,</span><span class="w">
@@ -647,7 +653,7 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'pyg' es una llamada POST</span>
 curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/accounting/pyg"</span>
-  <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
 </code></pre></div>
 <blockquote>
 <p>Ejemplo de JSON de respuesta:</p>
@@ -856,7 +862,7 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'contract/salary/pdf' es una llamada GET</span>
 curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/salary/pdf"</span>
-  <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"salaryId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
     </span><span class="nl">"enterpriseId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
@@ -895,7 +901,7 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'contract/employee/workplace' es una llamada GET</span>
 curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/employee/workplace"</span>
-  <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"workplace"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
     </span><span class="nl">"allEmployees"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -1022,7 +1028,7 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'contract/enterprise/salaries' es una llamada GET</span>
 curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/enterprise/salaries"</span>
-  <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"startDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-12-31"</span><span class="w">
@@ -1165,6 +1171,287 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 <td>Fecha de inicio de la nómina (dd-MM-yyyy)</td>
 </tr>
 </tbody></table>
+<h2 id='obtener-costes'>Obtener costes</h2>
+<p>Obtención de costes por fecha.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'contract/company/costs' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/company/costs"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-12-31"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-31"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"employee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGATSUMA, ZENITSU"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"employeeSS"</span><span class="p">:</span><span class="w"> </span><span class="mf">52.99</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"jobTraining"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.83</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"noEstruct"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bonuses"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"estruc"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"noEstructEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgpEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.42</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"otherDeductions"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fogasaEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.66</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"salaryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALARY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"embargos"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enterpriseSS"</span><span class="p">:</span><span class="w"> </span><span class="mf">296.46</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"jobTrainingEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.97</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"raw"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"estrucEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"irpfBase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgcBase"</span><span class="p">:</span><span class="w"> </span><span class="mf">827.88</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"irpf"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"advancedPayment"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquid"</span><span class="p">:</span><span class="w"> </span><span class="mf">927.01</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unemployment"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.25</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unemploymentEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">55.46</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"workplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAZADEMONIOS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgc"</span><span class="p">:</span><span class="w"> </span><span class="mf">38.91</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCost"</span><span class="p">:</span><span class="w"> </span><span class="mf">1296.46</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-31"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"employee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE MAGALLANES, FERNANDO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"employeeSS"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.65</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"jobTraining"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"noEstruct"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bonuses"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"estruc"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"noEstructEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgpEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.98</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"otherDeductions"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fogasaEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"salaryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SETTLE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"embargos"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enterpriseSS"</span><span class="p">:</span><span class="w"> </span><span class="mf">62.53</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"jobTrainingEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.19</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"raw"</span><span class="p">:</span><span class="w"> </span><span class="mf">199.18</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"estrucEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"irpfBase"</span><span class="p">:</span><span class="w"> </span><span class="mf">199.18</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgcBase"</span><span class="p">:</span><span class="w"> </span><span class="mf">199.18</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"irpf"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.98</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"advancedPayment"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquid"</span><span class="p">:</span><span class="w"> </span><span class="mf">182.55</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unemployment"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.09</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unemploymentEnterprise"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.95</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"workplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EXPLORACIÓN"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cgc"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.36</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCost"</span><span class="p">:</span><span class="w"> </span><span class="mf">261.71000000000004</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/contract/company/costs</code></p>
+<h3 id='parametros-4'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startDate</td>
+<td>date</td>
+<td>Fecha desde (dd-MM-yyyy)</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>date</td>
+<td>Fecha hasta (dd-MM-yyyy)</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-4'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>endDate</td>
+<td>date</td>
+<td>Fecha de fin de la nómina (dd-MM-yyyy)</td>
+</tr>
+<tr>
+<td>employee</td>
+<td>string</td>
+<td>Nombre completo del empleado</td>
+</tr>
+<tr>
+<td>cgp</td>
+<td>number</td>
+<td>Contingencias profesionales</td>
+</tr>
+<tr>
+<td>employeeSS</td>
+<td>number</td>
+<td>Total contribuciones del empleado</td>
+</tr>
+<tr>
+<td>jobTraining</td>
+<td>number</td>
+<td>Formación profesional</td>
+</tr>
+<tr>
+<td>noEstruct</td>
+<td>number</td>
+<td>Horas extras de fuerza mayor</td>
+</tr>
+<tr>
+<td>bonuses</td>
+<td>number</td>
+<td>Bonificaciones</td>
+</tr>
+<tr>
+<td>estruc</td>
+<td>number</td>
+<td>Horas extras estructurales</td>
+</tr>
+<tr>
+<td>noEstructEnterprise</td>
+<td>number</td>
+<td>Horas extras de fuerza mayor (empresa)</td>
+</tr>
+<tr>
+<td>cgpEnterprise</td>
+<td>number</td>
+<td>Contingencias profesionales (empresa)</td>
+</tr>
+<tr>
+<td>otherDeductions</td>
+<td>number</td>
+<td>Otras deducciones</td>
+</tr>
+<tr>
+<td>fogasaEnterprise</td>
+<td>number</td>
+<td>FOGASA</td>
+</tr>
+<tr>
+<td>salaryType</td>
+<td>string</td>
+<td>Tipo de nómina</td>
+</tr>
+<tr>
+<td>embargos</td>
+<td>number</td>
+<td>Embargos</td>
+</tr>
+<tr>
+<td>enterpriseSS</td>
+<td>number</td>
+<td>Total contribuciones de la empresa</td>
+</tr>
+<tr>
+<td>jobTrainingEnterprise</td>
+<td>number</td>
+<td>Formación profesional (empresa)</td>
+</tr>
+<tr>
+<td>raw</td>
+<td>number</td>
+<td>Bruto</td>
+</tr>
+<tr>
+<td>estrucEnterprise</td>
+<td>number</td>
+<td>Horas extras estructurales (empresa)</td>
+</tr>
+<tr>
+<td>irpfBase</td>
+<td>number</td>
+<td>Base IRPF</td>
+</tr>
+<tr>
+<td>cgcBase</td>
+<td>number</td>
+<td>Base de contingencias comunes</td>
+</tr>
+<tr>
+<td>irpf</td>
+<td>number</td>
+<td>IRPF</td>
+</tr>
+<tr>
+<td>advancedPayment</td>
+<td>number</td>
+<td>Anticipos</td>
+</tr>
+<tr>
+<td>unemployment</td>
+<td>number</td>
+<td>Desempleo</td>
+</tr>
+<tr>
+<td>unemploymentEnterprise</td>
+<td>number</td>
+<td>Desempleo (empresa)</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Nombre del centro de trabajo</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>date</td>
+<td>Fecha de inicio de la nómina</td>
+</tr>
+<tr>
+<td>cgc</td>
+<td>number</td>
+<td>Contingencias comunes</td>
+</tr>
+<tr>
+<td>totalCost</td>
+<td>number</td>
+<td>Coste total de empresa</td>
+</tr>
+</tbody></table>
+<h2 id='obtener-hoja-de-calculo-de-costes'>Obtener hoja de cálculo de costes</h2>
+<p>Obtención de la hoja de cálculo de costes.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'contract/company/costs/excel' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/contract/company/costs/excel"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-12-31"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/contract/company/costs/excel</code></p>
+<h3 id='parametros-5'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startDate</td>
+<td>date</td>
+<td>Fecha desde (dd-MM-yyyy)</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>date</td>
+<td>Fecha hasta (dd-MM-yyyy)</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-5'>Respuesta</h3>
+<p>El PDF con los costes.</p>
 
       </div>
       <div class="dark-box">
