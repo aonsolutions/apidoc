@@ -364,6 +364,20 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#facturacion" class="toc-h1 toc-link" data-title="Facturación">Facturación</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#obtener-facturas" class="toc-h2 toc-link" data-title="Obtener facturas">Obtener facturas</a>
+                  </li>
+                  <li>
+                    <a href="#obtener-factura" class="toc-h2 toc-link" data-title="Obtener factura">Obtener factura</a>
+                  </li>
+                  <li>
+                    <a href="#subir-factura" class="toc-h2 toc-link" data-title="Subir factura">Subir factura</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='#'>Contacta con Aon Solutions en </a></li>
@@ -1452,6 +1466,681 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 </tbody></table>
 <h3 id='respuesta-5'>Respuesta</h3>
 <p>El PDF con los costes.</p>
+<h1 id='facturacion'>Facturación</h1>
+<p>Métodos para la obtención de datos de facturas.</p>
+<h2 id='obtener-facturas'>Obtener facturas</h2>
+<p>Obtención de facturas resumidas</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'invoice' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounting"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"purchase,expenses"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-31"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A-345"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2041</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOFU FUJIWARA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1294902</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SCORED"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-25"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2/22"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">5445</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RAYSON CO LTD."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1289504</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SCORED"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">  
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/invoice</code></p>
+<h3 id='parametros'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipos (separados por coma) de facturas</td>
+</tr>
+<tr>
+<td>page</td>
+<td>number</td>
+<td>Página de los resultados</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>number</td>
+<td>Número máximo de resultados por página</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de la factura</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Cuantía total</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Nombre del titular</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura</td>
+</tr>
+</tbody></table>
+<h2 id='obtener-factura'>Obtener factura</h2>
+<p>Obtención del una factura</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'invoice' es una llamada GET</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">288</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-28T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"surcharge"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NIF"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"enableHeredity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"domainManagement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B12345678"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"legalPerson"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NERV"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">807851</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"documentCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"activity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4717</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rectified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"investment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"surcharge"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"surcharge_quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVA"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVA"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="mf">266.68</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emitida"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVA01-0000288"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">181975</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"withholdingFarmer"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">322.68</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NIF"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"enableHeredity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"domainManagement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B12345678"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"legalPerson"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NERV"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">807851</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"documentCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"service"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vatAccrualPayment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"surcharge"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">266.68</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"surcharge_quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">266.68</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Servicios de mantenimiento"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1681110</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"705012200"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1295807</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">322.68</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"paymethod"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-03-28"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1302213</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"705012200"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scored"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://aon.solutions/ms/api/invoice</code></p>
+<h3 id='parametros-2'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-2'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de la factura</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Retenciones</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Recargos</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>json</td>
+<td>Datos del receptor</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>number</td>
+<td>Identificador de actividad</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Rectificada</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>number</td>
+<td>Inversión</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>jsonArray</td>
+<td>Impuestos</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Régimen especial agrario</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Total de la factura</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>json</td>
+<td>Datos del remitente</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Servicio</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Criterio de caja</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio</td>
+</tr>
+<tr>
+<td>details</td>
+<td>jsonArray</td>
+<td>Detalles de la factura</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>jsonArray</td>
+<td>Datos bancarios</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Tipo de transacción</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura</td>
+</tr>
+</tbody></table>
+<h2 id='subir-factura'>Subir factura</h2>
+<p>Subir una factura</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'invoice' es una llamada POST</span>
+curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"empresa.aonsolutions.net"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1424.pdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">21610</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-07T07:49:38.546Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/*el archivo en base64*/"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/pdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1424.pdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contentEncoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base64"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contentSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">21610</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"invoice"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7138"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recibida"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"series"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"serie"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-07T07:49:38.546Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inbox"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"suplidos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remarks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nl">"selfconta"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"creation_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aon"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tbaiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-29T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creation_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"selfconta"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVA"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="mf">143.41</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recibida"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">143.41</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/pdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ms/api/file/eyJkb21haW5faWQiOjcxMzgsImF0dGFjaF90eXBlIjo..."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18223</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"tbaiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"insight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">143.41</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mf">143.41</span><span class="p">,</span><span class="w">
+            </span><span class="mf">116.41</span><span class="p">,</span><span class="w">
+            </span><span class="mf">99.42</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"issue_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-29T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Mon Jun 29 00:00:00 CEST 2020"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Tue Jun 30 00:00:00 CEST 2020"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"nifs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"str"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y1234567M"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NIE"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"str"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B12345678"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIF"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"series"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"serie"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remarks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inbox"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"suplidos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://aon.solutions/ms/api/invoice</code></p>
+<h3 id='parametros-3'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file</td>
+<td>json</td>
+<td>Datos del fichero a subir</td>
+</tr>
+<tr>
+<td>invoice</td>
+<td>json</td>
+<td>Datos de la nueva factura</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-3'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de la factura</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>false</td>
+<td>Retenciones</td>
+</tr>
+<tr>
+<td>creation_user</td>
+<td>string</td>
+<td>Usuario que crea la factura</td>
+</tr>
+<tr>
+<td>selfconta</td>
+<td>boolean</td>
+<td>SelfConta</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>jsonArray</td>
+<td>Impuestos</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de factura</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>Número de la factura</td>
+</tr>
+<tr>
+<td>total</td>
+<td>Number</td>
+<td>Total de la factura</td>
+</tr>
+<tr>
+<td>file</td>
+<td>json</td>
+<td>Fichero de la factura</td>
+</tr>
+<tr>
+<td>details</td>
+<td>jsonArray</td>
+<td>Detalles de la factura</td>
+</tr>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura</td>
+</tr>
+<tr>
+<td>tbai</td>
+<td>boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>json</td>
+<td>Datos del destinatario</td>
+</tr>
+<tr>
+<td>tbaiUrl</td>
+<td>string</td>
+<td>URL de Ticketbai</td>
+</tr>
+<tr>
+<td>insight</td>
+<td>json</td>
+<td>Datos parseados del fichero</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>json</td>
+<td>Datos del remitente</td>
+</tr>
+<tr>
+<td>series</td>
+<td>number</td>
+<td>Serie de la factura</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>string</td>
+<td>Identificador del dominio</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>number</td>
+<td>Serie de la factura</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>jsonArray</td>
+<td>Métodos de pago</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Transacción</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>jsonArray</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura</td>
+</tr>
+<tr>
+<td>suplidos</td>
+<td>json</td>
+<td>Suplidos</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
