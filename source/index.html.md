@@ -12,6 +12,7 @@ includes:
   - authentication
   - accounting
   - laboral
+  - invoice
 
 search: true
 
