@@ -35,7 +35,7 @@ curl --request GET "https://aon.solutions/ms/api/contract/salary/pdf"
 El PDF de la nómina pasada por parámetros
 
 ## Obtener empleados por centro de trabajo
-Obtención del una nómina en PDF.
+Obtención de empleados por su centro de trabajo.
 
 ```shell
 

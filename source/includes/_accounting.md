@@ -74,6 +74,19 @@ curl --request POST "https://aon.solutions/ms/api/accounting/pyg"
  -H "session_id:YOURSESSIONID" --data
 ```
 
+```json
+{
+    "domain": 7138,
+    "domainName": "empresa.aonsolutions.net",
+    "user": "admin",
+    "level": 5,
+    "byMonth": true,
+    "period": 11090,
+    "fromDate": "01/01/2022",
+    "toDate": "31/12/2022"
+}
+```
+
 > Ejemplo de JSON de respuesta:
 
 ```json

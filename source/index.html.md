@@ -13,6 +13,7 @@ includes:
   - accounting
   - laboral
   - invoice
+  - fiscal
 
 search: true
 
