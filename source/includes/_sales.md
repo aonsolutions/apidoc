@@ -632,273 +632,271 @@ curl --request PUT "https://aon.solutions/ms/api/sales"
  -H "domain_name:NOMBRE_DEL_DOMINIO" --data
 ```
 ```json
-[
+{
+"id": 1,
+"domain": 1,
+
+"project": {
+    "id": 1,
+    "domain": 1,
+    "alias": "",
+    "type": {
+    "id": 1,
+    "domain": 1,
+    "description": "",
+    "active": true,
+    "dirty": false
+    },
+    "name": "",
+    "date": "2022-05-09T00:00:00Z",
+    "registry": 1,
+    "active": true,
+    "dirty": false
+},
+"series": "",
+"number": 1,
+"purchaseReference": "",
+"seller": {
+    "id": 1,
+    "domain": { "id": 1 },
+    "document": "",
+    "documentCountry": "",
+    "documentType": "",
+    "name": "",
+    "alias": "",
+    "legalPerson": true,
+    "nationality": "",
+    "confidential": false,
+    "global": false,
+    "dirty": false,
+    "commissionType": {
+    "id": 1,
+    "domain": 1,
+    "name": "",
+    "rate": 10.0
+    },
+    "scope": {
+    "id": 1,
+    "domain": 1,
+    "description": ""
+    },
+    "active": true
+},
+"customer": {
+    "id": 1,
+    "domain": { "id": 1 },
+    "document": "",
+    "documentCountry": "",
+    "documentType": "",
+    "name": "",
+    "alias": "",
+    "legalPerson": true,
+    "nationality": "",
+    "confidential": false,
+    "global": false,
+    "dirty": false,
+    "account": 1,
+    "deliveryGrouped": false,
+    "deliveryValuated": false,
+    "eInvoice": false,
+    "invoicingGroup": 1,
+    "projectGrouped": false,
+    "surcharge": false,
+    "tariff": 1,
+    "transaction": "NATIONAL",
+    "withholding": false,
+    "scope": {
+    "id": 1,
+    "domain": 1,
+    "description": ""
+    },
+    "status": "ACTIVE"
+},
+"address": {
+    "id": 1,
+    "domain": 1,
+    "registry": 1,
+    "main": true,
+    "streetType": "",
+    "address": "",
+    "number": 2,
+    "address2": "",
+    "city": "",
+
+    "province": "",
+    "country": "",
+    "zip": "",
+    "dirty": false,
+    "removed": false,
+    "global": false
+},
+"date": "2022-05-09T00:00:00Z",
+"payMethod": {
+    "id": 1,
+    "domain": 1,
+    "type": "CASH_BASIS",
+    "name": ""
+},
+"confidential": false,
+"status": "PENDING",
+"type": "NORMAL",
+"comments": "",
+"remarks": "",
+"workplace": {
+    "id": 1,
+    "domain": 1,
+    "name": "",
+    "active": true,
+    "address": 1,
+    "customer": 1,
+    "economicAgreement": 1,
+    "scope": {
+    "id": 1,
+    "domain": 1,
+    "description": ""
+    }
+},
+"scope": {
+    "id": 1,
+    "domain": 1,
+    "description": ""
+},
+"deliveryDate": "2022-05-09'T'00:00:00'Z'",
+"numberOfPymnts": 1,
+"daysToFirstPymnt": 0,
+"daysBetweenPymnts": 0,
+"pymntDays": 1,
+
+"discount": "0.0",
+"bankAccount": "",
+"bankAlias": "",
+"bic": "",
+"carrier": {
+    "id": 1,
+    "domain": { "id": 1 },
+    "document": "",
+    "documentCountry": "",
+    "documentType": "",
+    "name": "",
+    "alias": "",
+    "legalPerson": true,
+    "nationality": "",
+    "confidential": false,
+    "global": false,
+    "dirty": false,
+    "scope": {
+    "id": 1,
+    "domain": 1,
+    "description": ""
+    },
+    "status": "ACTIVE"
+},
+"shippingAlternativeAddress": "",
+"shippingAlternativeAddress2": "",
+"shippingAlternativeZip": "",
+"shippingAlternativeCity": "",
+"shippingAlternativePhone": "",
+"shippingAlternativeRecipient": "",
+"shippingContact": "",
+"shippingPeriod": "",
+"details": [
     {
     "id": 1,
     "domain": 1,
+    "sales": 1,
+    "line": 1,
+    "item": {
+        "id": 1,
+        "domain": 1,
+        "detail": "",
+        "detail2": "",
 
-    "project": {
-        "id": 1,
-        "domain": 1,
-        "alias": "",
-        "type": {
-        "id": 1,
-        "domain": 1,
+        "detail3": "",
         "description": "",
-        "active": true,
-        "dirty": false
-        },
-        "name": "",
-        "date": "2022-05-09T00:00:00Z",
-        "registry": 1,
-        "active": true,
-        "dirty": false
-    },
-    "series": "",
-    "number": 1,
-    "purchaseReference": "",
-    "seller": {
+        "serialNumber": "",
+        "serialDate": "2022-05-09'T'00:00:00'Z'",
+        "barcode": "",
+        "status": "ACTIVE",
+        "product": {
         "id": 1,
         "domain": { "id": 1 },
-        "document": "",
-        "documentCountry": "",
-        "documentType": "",
+        "code": "",
         "name": "",
-        "alias": "",
-        "legalPerson": true,
-        "nationality": "",
-        "confidential": false,
-        "global": false,
-        "dirty": false,
-        "commissionType": {
-        "id": 1,
-        "domain": 1,
-        "name": "",
-        "rate": 10.0
-        },
-        "scope": {
-        "id": 1,
-        "domain": 1,
-        "description": ""
-        },
-        "active": true
-    },
-    "customer": {
-        "id": 1,
-        "domain": { "id": 1 },
-        "document": "",
-        "documentCountry": "",
-        "documentType": "",
-        "name": "",
-        "alias": "",
-        "legalPerson": true,
-        "nationality": "",
-        "confidential": false,
-        "global": false,
-        "dirty": false,
-        "account": 1,
-        "deliveryGrouped": false,
-        "deliveryValuated": false,
-        "eInvoice": false,
-        "invoicingGroup": 1,
-        "projectGrouped": false,
-        "surcharge": false,
-        "tariff": 1,
-        "transaction": "NATIONAL",
-        "withholding": false,
-        "scope": {
-        "id": 1,
-        "domain": 1,
-        "description": ""
-        },
-        "status": "ACTIVE"
-    },
-    "address": {
-        "id": 1,
-        "domain": 1,
-        "registry": 1,
-        "main": true,
-        "streetType": "",
-        "address": "",
-        "number": 2,
-        "address2": "",
-        "city": "",
-
-        "province": "",
-        "country": "",
-        "zip": "",
-        "dirty": false,
-        "removed": false,
-        "global": false
-    },
-    "date": "2022-05-09T00:00:00Z",
-    "payMethod": {
-        "id": 1,
-        "domain": 1,
-        "type": "CASH_BASIS",
-        "name": ""
-    },
-    "confidential": false,
-    "status": "PENDING",
-    "type": "NORMAL",
-    "comments": "",
-    "remarks": "",
-    "workplace": {
-        "id": 1,
-        "domain": 1,
-        "name": "",
-        "active": true,
-        "address": 1,
-        "customer": 1,
-        "economicAgreement": 1,
-        "scope": {
-        "id": 1,
-        "domain": 1,
-        "description": ""
-        }
-    },
-    "scope": {
-        "id": 1,
-        "domain": 1,
-        "description": ""
-    },
-    "deliveryDate": "2022-05-09'T'00:00:00'Z'",
-    "numberOfPymnts": 1,
-    "daysToFirstPymnt": 0,
-    "daysBetweenPymnts": 0,
-    "pymntDays": 1,
-
-    "discount": "0.0",
-    "bankAccount": "",
-    "bankAlias": "",
-    "bic": "",
-    "carrier": {
-        "id": 1,
-        "domain": { "id": 1 },
-        "document": "",
-        "documentCountry": "",
-        "documentType": "",
-        "name": "",
-        "alias": "",
-        "legalPerson": true,
-        "nationality": "",
-        "confidential": false,
-        "global": false,
-        "dirty": false,
-        "scope": {
-        "id": 1,
-        "domain": 1,
-        "description": ""
-        },
-        "status": "ACTIVE"
-    },
-    "shippingAlternativeAddress": "",
-    "shippingAlternativeAddress2": "",
-    "shippingAlternativeZip": "",
-    "shippingAlternativeCity": "",
-    "shippingAlternativePhone": "",
-    "shippingAlternativeRecipient": "",
-    "shippingContact": "",
-    "shippingPeriod": "",
-    "details": [
-        {
-        "id": 1,
-        "domain": 1,
-        "sales": 1,
-        "line": 1,
-        "item": {
+        "brand": {
             "id": 1,
             "domain": 1,
+            "name": ""
+        },
+        "category": {
+            "id": 1,
+            "domain": 1,
+            "name": "",
             "detail": "",
             "detail2": "",
-
-            "detail3": "",
-            "description": "",
-            "serialNumber": "",
-            "serialDate": "2022-05-09'T'00:00:00'Z'",
-            "barcode": "",
-            "status": "ACTIVE",
-            "product": {
-            "id": 1,
-            "domain": { "id": 1 },
-            "code": "",
-            "name": "",
-            "brand": {
-                "id": 1,
-                "domain": 1,
-                "name": ""
-            },
-            "category": {
-                "id": 1,
-                "domain": 1,
-                "name": "",
-                "detail": "",
-                "detail2": "",
-                "detail3": ""
-            },
-            "type": "LABOUR",
-            "kind": "SALE_PURCHASE",
-            "status": "ACTIVE",
-            "vat": 21.0,
-            "retention": 15.0,
-            "inventoriable": true,
-            "serializable": true,
-            "lotable": true,
-            "manufactured": true,
-            "composition": true,
-            "compositionPrice": true,
-            "packaged": true,
-            "salesAccount": {
-                "id": 1,
-                "domain": 1,
-                "code": "",
-                "description": "",
-                "alias": "",
-                "entryEnabled": true,
-
-                "level": 1,
-                "active": true,
-                "costCenter": ""
-            },
-            "purchaseAccount": {
-                "id": 1,
-                "domain": 1,
-                "code": "",
-                "description": "",
-                "alias": "",
-                "entryEnabled": true,
-                "level": 1,
-                "active": true,
-                "costCenter": ""
-            }
-            },
-            "price": 0.0,
-            "expensesPercent": 0.0,
-            "profitPercent": 0.0,
-            "purchasePrice": 0.0,
-            "expensesFixed": 0.0,
-            "internet": false,
-            "packFormatTag": 1,
-            "packUnits": 2,
-            "packUnitsTag": 3,
-            "packMeasurement": 0.0,
-            "packMeasurementTag": 4,
-            "stockUnitTag": 5
+            "detail3": ""
         },
-        "description": "",
-        "quantity": 0.0,
-        "price": 0.0,
-        "discount": "0.0",
-        "taxes": 0.0,
-        "status": "PENDING",
-        "offerDetail": 1,
-        "delivered": 0.0,
-        "carrier": {},
-        "carrierPacking": 1
+        "type": "LABOUR",
+        "kind": "SALE_PURCHASE",
+        "status": "ACTIVE",
+        "vat": 21.0,
+        "retention": 15.0,
+        "inventoriable": true,
+        "serializable": true,
+        "lotable": true,
+        "manufactured": true,
+        "composition": true,
+        "compositionPrice": true,
+        "packaged": true,
+        "salesAccount": {
+            "id": 1,
+            "domain": 1,
+            "code": "",
+            "description": "",
+            "alias": "",
+            "entryEnabled": true,
+
+            "level": 1,
+            "active": true,
+            "costCenter": ""
+        },
+        "purchaseAccount": {
+            "id": 1,
+            "domain": 1,
+            "code": "",
+            "description": "",
+            "alias": "",
+            "entryEnabled": true,
+            "level": 1,
+            "active": true,
+            "costCenter": ""
         }
-    ]
+        },
+        "price": 0.0,
+        "expensesPercent": 0.0,
+        "profitPercent": 0.0,
+        "purchasePrice": 0.0,
+        "expensesFixed": 0.0,
+        "internet": false,
+        "packFormatTag": 1,
+        "packUnits": 2,
+        "packUnitsTag": 3,
+        "packMeasurement": 0.0,
+        "packMeasurementTag": 4,
+        "stockUnitTag": 5
+    },
+    "description": "",
+    "quantity": 0.0,
+    "price": 0.0,
+    "discount": "0.0",
+    "taxes": 0.0,
+    "status": "PENDING",
+    "offerDetail": 1,
+    "delivered": 0.0,
+    "carrier": {},
+    "carrierPacking": 1
     }
 ]
+}
 ```
 
 ### HTTP Request
