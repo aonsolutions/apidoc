@@ -14,6 +14,8 @@ includes:
   - laboral
   - invoice
   - fiscal
+  - sales
+  - delivery
 
 search: true
 
