@@ -16,6 +16,7 @@ includes:
   - fiscal
   - sales
   - delivery
+  - customers
 
 search: true
 
