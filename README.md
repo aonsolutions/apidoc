@@ -11,7 +11,7 @@
 
 <p align="center"><em>The example above was created with Slate. Check it out at <a href="https://slatedocs.github.io/slate">slatedocs.github.io/slate</a>.</em></p>
 
-<p align="center"><em>Url aonsolutions<a href="https://aonsolutions.github.io/apidoc">https://aonsolutions.github.io/apidoc</a>.</em></p>
+<p align="center"><em><a href="https://aonsolutions.github.io/apidoc">https://aonsolutions.github.io/apidoc</a>.</em></p>
 
 Features
 ------------
