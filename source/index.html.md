@@ -17,6 +17,7 @@ includes:
   - sales
   - delivery
   - customers
+  - targets
 
 search: true
 
