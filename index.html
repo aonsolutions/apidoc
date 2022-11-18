@@ -374,28 +374,16 @@
                     <a href="#obtener-factura" class="toc-h2 toc-link" data-title="Obtener factura">Obtener factura</a>
                   </li>
                   <li>
-                    <a href="#subir-factura" class="toc-h2 toc-link" data-title="Subir factura">Subir factura</a>
+                    <a href="#crear-factura" class="toc-h2 toc-link" data-title="Crear factura">Crear factura</a>
+                  </li>
+                  <li>
+                    <a href="#modificar-factura" class="toc-h2 toc-link" data-title="Modificar factura">Modificar factura</a>
                   </li>
                   <li>
                     <a href="#aceptar-factura" class="toc-h2 toc-link" data-title="Aceptar factura">Aceptar factura</a>
                   </li>
                   <li>
-                    <a href="#eliminar-documentos-pendientes" class="toc-h2 toc-link" data-title="Eliminar documentos pendientes">Eliminar documentos pendientes</a>
-                  </li>
-                  <li>
                     <a href="#eliminar-factura" class="toc-h2 toc-link" data-title="Eliminar factura">Eliminar factura</a>
-                  </li>
-                  <li>
-                    <a href="#obtener-configuracion" class="toc-h2 toc-link" data-title="Obtener configuración">Obtener configuración</a>
-                  </li>
-                  <li>
-                    <a href="#guardar-configuracion" class="toc-h2 toc-link" data-title="Guardar configuración">Guardar configuración</a>
-                  </li>
-                  <li>
-                    <a href="#obtener-configuracion-de-impresion" class="toc-h2 toc-link" data-title="Obtener configuración de impresión">Obtener configuración de impresión</a>
-                  </li>
-                  <li>
-                    <a href="#guardar-configuracion-de-impresion" class="toc-h2 toc-link" data-title="Guardar configuración de impresión">Guardar configuración de impresión</a>
                   </li>
               </ul>
           </li>
@@ -1561,7 +1549,7 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 <p>Obtención de facturas resumidas</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'invoice' es una llamada GET</span>
-curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoices"</span>
  <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounting"</span><span class="p">,</span><span class="w">
@@ -1592,7 +1580,7 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">  
 </span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://aon.solutions/ms/api/invoice</code></p>
+<p><code>GET https://aon.solutions/ms/api/invoices</code></p>
 <h3 id='parametros'>Parámetros</h3>
 <table><thead>
 <tr>
@@ -1631,9 +1619,9 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 </tr>
 </thead><tbody>
 <tr>
-<td>date</td>
-<td>date</td>
-<td>Fecha de la factura</td>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura</td>
 </tr>
 <tr>
 <td>reference</td>
@@ -1641,9 +1629,9 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 <td>Referencia de la factura</td>
 </tr>
 <tr>
-<td>total</td>
-<td>number</td>
-<td>Cuantía total</td>
+<td>date</td>
+<td>date</td>
+<td>Fecha de la factura</td>
 </tr>
 <tr>
 <td>name</td>
@@ -1651,21 +1639,21 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 <td>Nombre del titular</td>
 </tr>
 <tr>
-<td>id</td>
-<td>number</td>
-<td>Identificador de la factura</td>
-</tr>
-<tr>
 <td>status</td>
 <td>string</td>
 <td>Estado de la factura</td>
 </tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura</td>
+</tr>
 </tbody></table>
 <h2 id='obtener-factura'>Obtener factura</h2>
-<p>Obtención del una factura</p>
+<p>Obtención de una factura</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'invoice' es una llamada GET</span>
-curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoices/:id"</span>
  <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
  <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -1764,7 +1752,7 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scored"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://aon.solutions/ms/api/invoice</code></p>
+<p><code>GET https://aon.solutions/ms/api/invoices/:id</code></p>
 <h3 id='parametros-2'>Parámetros</h3>
 <table><thead>
 <tr>
@@ -1788,193 +1776,206 @@ curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutio
 </tr>
 </thead><tbody>
 <tr>
-<td>date</td>
-<td>date</td>
-<td>Fecha de la factura</td>
-</tr>
-<tr>
-<td>withholding</td>
-<td>boolean</td>
-<td>Retenciones</td>
-</tr>
-<tr>
-<td>surcharge</td>
-<td>boolean</td>
-<td>Recargos</td>
-</tr>
-<tr>
-<td>receiver</td>
-<td>json</td>
-<td>Datos del receptor</td>
-</tr>
-<tr>
-<td>activity</td>
+<td>id</td>
 <td>number</td>
-<td>Identificador de actividad</td>
-</tr>
-<tr>
-<td>rectified</td>
-<td>boolean</td>
-<td>Rectificada</td>
-</tr>
-<tr>
-<td>investment</td>
-<td>number</td>
-<td>Inversión</td>
-</tr>
-<tr>
-<td>taxes</td>
-<td>jsonArray</td>
-<td>Impuestos</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>Tipo</td>
-</tr>
-<tr>
-<td>reference</td>
-<td>string</td>
-<td>Referencia</td>
-</tr>
-<tr>
-<td>number</td>
-<td>number</td>
-<td>Número de factura</td>
-</tr>
-<tr>
-<td>withholdingFarmer</td>
-<td>boolean</td>
-<td>Régimen especial agrario</td>
-</tr>
-<tr>
-<td>total</td>
-<td>number</td>
-<td>Total de la factura</td>
-</tr>
-<tr>
-<td>sender</td>
-<td>json</td>
-<td>Datos del remitente</td>
-</tr>
-<tr>
-<td>service</td>
-<td>boolean</td>
-<td>Servicio</td>
-</tr>
-<tr>
-<td>vatAccrualPayment</td>
-<td>boolean</td>
-<td>Criterio de caja</td>
+<td>Identificador de la factura.</td>
 </tr>
 <tr>
 <td>domain</td>
 <td>number</td>
-<td>Identificador del dominio</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
 </tr>
 <tr>
-<td>details</td>
-<td>jsonArray</td>
-<td>Detalles de la factura</td>
-</tr>
-<tr>
-<td>id</td>
-<td>number</td>
-<td>Identificador de la factura</td>
-</tr>
-<tr>
-<td>finances</td>
-<td>jsonArray</td>
-<td>Datos bancarios</td>
-</tr>
-<tr>
-<td>category</td>
+<td>type</td>
 <td>string</td>
-<td>Categoría de la factura</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
 </tr>
 <tr>
 <td>transaction</td>
 <td>string</td>
-<td>Tipo de transacción</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Estado de la factura</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>array</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
 </tr>
 </tbody></table>
-<h2 id='subir-factura'>Subir factura</h2>
-<p>Subir una factura</p>
+<h2 id='crear-factura'>Crear factura</h2>
+<p>Crear una factura</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'invoice' es una llamada POST</span>
-curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoices"</span>
  <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
  <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"empresa.aonsolutions.net"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1424.pdf"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">21610</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-07T07:49:38.546Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/*el archivo en base64*/"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/pdf"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1424.pdf"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contentEncoding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base64"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contentSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">21610</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7138"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recibida"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"serie"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-07T07:49:38.546Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"invoice"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7138"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recibida"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"series"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"serie"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-07T07:49:38.546Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-        </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-        </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inbox"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"suplidos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"remarks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-        </span><span class="nl">"selfconta"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"creation_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aon"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tbaiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inbox"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"suplidos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remarks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"selfconta"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creation_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tbaiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -2066,7 +2067,7 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST https://aon.solutions/ms/api/invoice</code></p>
+<p><code>POST https://aon.solutions/ms/api/invoices</code></p>
 <h3 id='parametros-3'>Parámetros</h3>
 <table><thead>
 <tr>
@@ -2076,14 +2077,144 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 </tr>
 </thead><tbody>
 <tr>
-<td>file</td>
-<td>json</td>
-<td>Datos del fichero a subir</td>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
 </tr>
 <tr>
-<td>invoice</td>
-<td>json</td>
-<td>Datos de la nueva factura</td>
+<td>type</td>
+<td>string</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>array</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
 </tr>
 </tbody></table>
 <h3 id='respuesta-3'>Respuesta</h3>
@@ -2095,146 +2226,611 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
 </tr>
 </thead><tbody>
 <tr>
-<td>date</td>
-<td>date</td>
-<td>Fecha de la factura</td>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura.</td>
 </tr>
 <tr>
-<td>withholding</td>
-<td>false</td>
-<td>Retenciones</td>
-</tr>
-<tr>
-<td>creation_user</td>
-<td>string</td>
-<td>Usuario que crea la factura</td>
-</tr>
-<tr>
-<td>selfconta</td>
-<td>boolean</td>
-<td>SelfConta</td>
-</tr>
-<tr>
-<td>taxes</td>
-<td>jsonArray</td>
-<td>Impuestos</td>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>Tipo de factura</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
 </tr>
 <tr>
 <td>reference</td>
 <td>string</td>
-<td>Referencia de la factura</td>
+<td>Referencia de la factura.</td>
 </tr>
 <tr>
-<td>number</td>
-<td>string</td>
-<td>Número de la factura</td>
-</tr>
-<tr>
-<td>total</td>
-<td>Number</td>
-<td>Total de la factura</td>
-</tr>
-<tr>
-<td>file</td>
-<td>json</td>
-<td>Fichero de la factura</td>
-</tr>
-<tr>
-<td>details</td>
-<td>jsonArray</td>
-<td>Detalles de la factura</td>
-</tr>
-<tr>
-<td>id</td>
-<td>number</td>
-<td>Identificador de la factura</td>
-</tr>
-<tr>
-<td>tbai</td>
-<td>boolean</td>
-<td>false</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>string</td>
-<td>Comentarios</td>
-</tr>
-<tr>
-<td>receiver</td>
-<td>json</td>
-<td>Datos del destinatario</td>
-</tr>
-<tr>
-<td>tbaiUrl</td>
-<td>string</td>
-<td>URL de Ticketbai</td>
-</tr>
-<tr>
-<td>insight</td>
-<td>json</td>
-<td>Datos parseados del fichero</td>
-</tr>
-<tr>
-<td>sender</td>
-<td>json</td>
-<td>Datos del remitente</td>
-</tr>
-<tr>
-<td>series</td>
-<td>number</td>
-<td>Serie de la factura</td>
-</tr>
-<tr>
-<td>domain</td>
-<td>string</td>
-<td>Identificador del dominio</td>
-</tr>
-<tr>
-<td>serie</td>
-<td>number</td>
-<td>Serie de la factura</td>
-</tr>
-<tr>
-<td>category</td>
-<td>string</td>
-<td>Categoría de la factura</td>
-</tr>
-<tr>
-<td>finances</td>
-<td>jsonArray</td>
-<td>Métodos de pago</td>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
 </tr>
 <tr>
 <td>transaction</td>
 <td>string</td>
-<td>Transacción</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
 </tr>
 <tr>
 <td>remarks</td>
-<td>jsonArray</td>
-<td></td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Estado de la factura</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
 </tr>
 <tr>
-<td>suplidos</td>
-<td>json</td>
-<td>Suplidos</td>
+<td>taxes</td>
+<td>array</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
+</tr>
+</tbody></table>
+<h2 id='modificar-factura'>Modificar factura</h2>
+<p>Modificar una factura</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>
+<span class="c"># El servicio 'invoice' es una llamada PUT</span>
+curl <span class="nt">--request</span> PUT <span class="s2">"https://aon.solutions/ms/api/invoices/:id"</span>
+ <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
+ <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7138"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recibida"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"serie"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-07T07:49:38.546Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inbox"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"suplidos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remarks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"selfconta"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creation_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tbaiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Ejemplo de JSON de respuesta:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-29T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creation_user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"selfconta"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IVA"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="mf">143.41</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recibida"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">143.41</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/pdf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ms/api/file/eyJkb21haW5faWQiOjcxMzgsImF0dGFjaF90eXBlIjo..."</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18223</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"tbaiUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"insight"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">143.41</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mf">143.41</span><span class="p">,</span><span class="w">
+            </span><span class="mf">116.41</span><span class="p">,</span><span class="w">
+            </span><span class="mf">99.42</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"issue_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-29T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"dates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Mon Jun 29 00:00:00 CEST 2020"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Tue Jun 30 00:00:00 CEST 2020"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"nifs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"str"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y1234567M"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NIE"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"str"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B12345678"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIF"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"series"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"serie"</span><span class="p">:</span><span class="w"> </span><span class="mi">2022</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"finances"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remarks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inbox"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"suplidos"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT https://aon.solutions/ms/api/invoices/:id</code></p>
+<h3 id='parametros-4'>Parámetros</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura.</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>array</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-4'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura.</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>array</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
 </tr>
 </tbody></table>
 <h2 id='aceptar-factura'>Aceptar factura</h2>
 <p>Aceptar una factura</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'invoice/accept' es una llamada PUT</span>
-curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoice/accept"</span>
+curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoices/accept"</span>
  <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
  <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -2429,328 +3025,8 @@ curl <span class="nt">--request</span> POST <span class="s2">"https://aon.soluti
     </span><span class="nl">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
-<p><code>PUT https://aon.solutions/ms/api/invoice/accept</code></p>
-<h3 id='parametros-4'>Parámetros</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>number</td>
-<td>Identifcador de la factura</td>
-</tr>
-<tr>
-<td>domain</td>
-<td>string</td>
-<td>Identificador del dominio</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>Tipo de factura</td>
-</tr>
-<tr>
-<td>series</td>
-<td>number</td>
-<td>Serie de la factura</td>
-</tr>
-<tr>
-<td>serie</td>
-<td>number</td>
-<td>Serie de la factura</td>
-</tr>
-<tr>
-<td>number</td>
-<td>string</td>
-<td>Número de de la factura</td>
-</tr>
-<tr>
-<td>reference</td>
-<td>string</td>
-<td>Referencia de la factura</td>
-</tr>
-<tr>
-<td>date</td>
-<td>date</td>
-<td>Fecha de la factura</td>
-</tr>
-<tr>
-<td>transaction</td>
-<td>string</td>
-<td>Transacción</td>
-</tr>
-<tr>
-<td>category</td>
-<td>string</td>
-<td>Categoría</td>
-</tr>
-<tr>
-<td>total</td>
-<td>number</td>
-<td>Cuantía total</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>Razón social</td>
-</tr>
-<tr>
-<td>sender</td>
-<td>json</td>
-<td>Datos del remitente</td>
-</tr>
-<tr>
-<td>receiver</td>
-<td>json</td>
-<td>Datos del destinatario</td>
-</tr>
-<tr>
-<td>details</td>
-<td>jsonArray</td>
-<td>Detalles de la factura</td>
-</tr>
-<tr>
-<td>taxes</td>
-<td>jsonArray</td>
-<td>Impuestos</td>
-</tr>
-<tr>
-<td>finances</td>
-<td>jsonArray</td>
-<td>Información de los métodos de pago</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>Estado de la factura</td>
-</tr>
-<tr>
-<td>suplidos</td>
-<td>json</td>
-<td>Suplidos</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>string</td>
-<td>Comentarios</td>
-</tr>
-<tr>
-<td>remarks</td>
-<td>jsonArray</td>
-<td>Observaciones</td>
-</tr>
-<tr>
-<td>selfconta</td>
-<td>boolean</td>
-<td>Selfconta</td>
-</tr>
-<tr>
-<td>service</td>
-<td>boolean</td>
-<td>Servicio</td>
-</tr>
-<tr>
-<td>withholding</td>
-<td>boolean</td>
-<td>Retenciones</td>
-</tr>
-<tr>
-<td>investment</td>
-<td>boolean</td>
-<td>Inversión</td>
-</tr>
-<tr>
-<td>withholdingFarmer</td>
-<td>boolean</td>
-<td>Régimen especial agrario</td>
-</tr>
-<tr>
-<td>vatAccrualPayment</td>
-<td>boolean</td>
-<td>Criterio de caja</td>
-</tr>
-<tr>
-<td>surcharge</td>
-<td>boolean</td>
-<td>Recargos</td>
-</tr>
-<tr>
-<td>rectified</td>
-<td>boolean</td>
-<td>Rectificada</td>
-</tr>
-<tr>
-<td>creation_user</td>
-<td>string</td>
-<td>Usuario que crea la factura</td>
-</tr>
-<tr>
-<td>tbai</td>
-<td>boolean</td>
-<td>Ticketbai</td>
-</tr>
-<tr>
-<td>tbaiUrl</td>
-<td>string</td>
-<td>URL de Ticketbai</td>
-</tr>
-<tr>
-<td>file</td>
-<td>json</td>
-<td>Información del fichero</td>
-</tr>
-<tr>
-<td>paymethod</td>
-<td>string</td>
-<td>Método de pago</td>
-</tr>
-</tbody></table>
-<h3 id='respuesta-4'>Respuesta</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>date</td>
-<td>date</td>
-<td>Fecha de la factura</td>
-</tr>
-<tr>
-<td>withholding</td>
-<td>boolean</td>
-<td>Retenciones</td>
-</tr>
-<tr>
-<td>surcharge</td>
-<td>boolean</td>
-<td>Recargo</td>
-</tr>
-<tr>
-<td>receiver</td>
-<td>json</td>
-<td>Datos del destinatario</td>
-</tr>
-<tr>
-<td>activity</td>
-<td>number</td>
-<td>Identificador de actividad</td>
-</tr>
-<tr>
-<td>rectified</td>
-<td>boolean</td>
-<td>Rectificada</td>
-</tr>
-<tr>
-<td>investment</td>
-<td>boolean</td>
-<td>Inversión</td>
-</tr>
-<tr>
-<td>taxes</td>
-<td>jsonArray</td>
-<td>Impuestos</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>Tipo de factura</td>
-</tr>
-<tr>
-<td>reference</td>
-<td>string</td>
-<td>Referencia de la factura</td>
-</tr>
-<tr>
-<td>number</td>
-<td>number</td>
-<td>Número de la factura</td>
-</tr>
-<tr>
-<td>withholdingFarmer</td>
-<td>boolean</td>
-<td>Régimen especial agrario</td>
-</tr>
-<tr>
-<td>total</td>
-<td>number</td>
-<td>Cuantía total</td>
-</tr>
-<tr>
-<td>sender</td>
-<td>json</td>
-<td>Datos del remitente</td>
-</tr>
-<tr>
-<td>series</td>
-<td>string</td>
-<td>Serie de la factura</td>
-</tr>
-<tr>
-<td>service</td>
-<td>boolean</td>
-<td>Servicio</td>
-</tr>
-<tr>
-<td>vatAccrualPayment</td>
-<td>boolean</td>
-<td>Criterio de caja</td>
-</tr>
-<tr>
-<td>domain</td>
-<td>number</td>
-<td>Identificador del dominio</td>
-</tr>
-<tr>
-<td>serie</td>
-<td>string</td>
-<td>Serie de la factura</td>
-</tr>
-<tr>
-<td>details</td>
-<td>jsonArray</td>
-<td>Detalles de la factura</td>
-</tr>
-<tr>
-<td>id</td>
-<td>number</td>
-<td>Identificador de la factura</td>
-</tr>
-<tr>
-<td>finances</td>
-<td>jsonArray</td>
-<td>Datos de los métodos de pago</td>
-</tr>
-<tr>
-<td>transaction</td>
-<td>string</td>
-<td>Transacción</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>Estado de la factura</td>
-</tr>
-</tbody></table>
-<h2 id='eliminar-documentos-pendientes'>Eliminar documentos pendientes</h2>
-<p>Eliminación de documentos pendientes</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>
-<span class="c"># El servicio 'invoice/rawdoc' es una llamada DELETE</span>
-curl <span class="nt">--request</span> DELETE <span class="s2">"https://aon.solutions/ms/api/invoice/rawdoc"</span>
- <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
- <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
-</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">18224</span><span class="p">,</span><span class="w"> </span><span class="mi">18225</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
-<p><code>DELETE https://aon.solutions/ms/api/invoice/rawdoc</code></p>
+<p><code>POST https://aon.solutions/ms/api/invoices/accept</code></p>
 <h3 id='parametros-5'>Parámetros</h3>
 <table><thead>
 <tr>
@@ -2761,22 +3037,316 @@ curl <span class="nt">--request</span> DELETE <span class="s2">"https://aon.solu
 </thead><tbody>
 <tr>
 <td>id</td>
+<td>number</td>
+<td>Identificador de la factura.</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
+</tr>
+<tr>
+<td>taxes</td>
 <td>array</td>
-<td>Array de ids de las facturas</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
+</tr>
+</tbody></table>
+<h3 id='respuesta-5'>Respuesta</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>number</td>
+<td>Identificador de la factura.</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>number</td>
+<td>Identificador del dominio al que pertenece la factura.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Tipo de la factura. valores permitidos: emitida, recibida, ticket.</td>
+</tr>
+<tr>
+<td>serie</td>
+<td>string</td>
+<td>Serie de la factura.</td>
+</tr>
+<tr>
+<td>number</td>
+<td>number</td>
+<td>Número de factura.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>string</td>
+<td>Referencia de la factura.</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>Fecha de emisión la factura.</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>string</td>
+<td>Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Categoría de la factura. (Cuenta Contable de la factura).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>number</td>
+<td>Importe total de la factura.</td>
+</tr>
+<tr>
+<td>sender</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>object</td>
+<td>Información del emisor de la factura.</td>
+</tr>
+<tr>
+<td>investment</td>
+<td>boolean</td>
+<td>Indica si es una factura de inversión.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>boolean</td>
+<td>Indica si es una factura de servicio.</td>
+</tr>
+<tr>
+<td>withholding</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Retención.</td>
+</tr>
+<tr>
+<td>withholdingFarmer</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca.</td>
+</tr>
+<tr>
+<td>vatAccrualPayment</td>
+<td>boolean</td>
+<td>Indica si la factura tiene régimen especial de criterio de caja.</td>
+</tr>
+<tr>
+<td>surcharge</td>
+<td>boolean</td>
+<td>Indica si la factura tiene Recargo de equivalencia.</td>
+</tr>
+<tr>
+<td>rectified</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificada.</td>
+</tr>
+<tr>
+<td>rectifier</td>
+<td>boolean</td>
+<td>Indica si es una factura rectificativa.</td>
+</tr>
+<tr>
+<td>rectificationInvoice</td>
+<td>number</td>
+<td>Identificador de la factura rectificada o de la factura rectificativa.</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>string</td>
+<td>Comentarios de la factura.</td>
+</tr>
+<tr>
+<td>remarks</td>
+<td>string</td>
+<td>Observaciones de la factura.</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>object</td>
+<td>Actividad de la factura.</td>
+</tr>
+<tr>
+<td>workplace</td>
+<td>string</td>
+<td>Centro de trabajo de la factura.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored</td>
+</tr>
+<tr>
+<td>taxes</td>
+<td>array</td>
+<td>Resumen de los impuestos de la factura.</td>
+</tr>
+<tr>
+<td>details</td>
+<td>array</td>
+<td>Detalles de la factura.</td>
+</tr>
+<tr>
+<td>finances</td>
+<td>array</td>
+<td>Vencimientos de la factura.</td>
 </tr>
 </tbody></table>
 <h2 id='eliminar-factura'>Eliminar factura</h2>
 <p>Eliminación de una factura</p>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>
 <span class="c"># El servicio 'invoice' es una llamada DELETE</span>
-curl <span class="nt">--request</span> DELETE <span class="s2">"https://aon.solutions/ms/api/invoice"</span>
+curl <span class="nt">--request</span> DELETE <span class="s2">"https://aon.solutions/ms/api/invoices/:id"</span>
  <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
  <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
 </code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">18224</span><span class="p">,</span><span class="w"> </span><span class="mi">18225</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
-<p><code>DELETE https://aon.solutions/ms/api/invoice</code></p>
+<p><code>DELETE https://aon.solutions/ms/api/invoices/:id</code></p>
 <h3 id='parametros-6'>Parámetros</h3>
 <table><thead>
 <tr>
@@ -2791,676 +3361,6 @@ curl <span class="nt">--request</span> DELETE <span class="s2">"https://aon.solu
 <td>Identificador de la factura</td>
 </tr>
 </tbody></table>
-<h2 id='obtener-configuracion'>Obtener configuración</h2>
-<p>Obtención de la configuración del usuario de facturas.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>
-<span class="c"># El servicio 'invoice/configuration' es una llamada GET</span>
-curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoice/configuration"</span>
- <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
- <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
-</code></pre></div>
-<blockquote>
-<p>Ejemplo de JSON de respuesta:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"print"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"border"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contactData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"footer"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"detailed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"adjust"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"legal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De conformidad con la Ley Orgánica 15/1999, le informamos que sus datos se hallan incorporados a un fichero titularidad de CAPSULE CORP. con la finalidad de cumplir con nuestra relación comercial. Puede ejercer los derechos de acceso, rectificación, cancelación y oposición en cualquier momento, mediante escrito, acompañado de copia de documento oficial que le identifique, dirigido a CAPSULE CORP., CALLE FALSA, 123"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"titleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxBorderColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#808080"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLACK_AND_WHITE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxTitleBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxTitleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxBodyBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"textColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"customerBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#E7E7E7"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"recordData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"sii"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"autosend"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"includeDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"registryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tax"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"surcharge"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIF"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B12345678"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"eInvoice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"documentCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"vatAccrualPayment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulma@capsule.es"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"domainType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFFICE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="mi">3195</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"capsule.aonsolutions.net"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"enableHeredity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAPSULE CORP."</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"domainManagement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxDefinedUsers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"parentId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"legalPerson"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAPSULE CORP."</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAPSULE"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"eInvoice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-7'>HTTP Request</h3>
-<p><code>GET https://aon.solutions/ms/api/invoice/configuration</code></p>
-<h3 id='parametros-7'>Parámetros</h3>
-<p>No requiere</p>
-<h3 id='respuesta-5'>Respuesta</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>tbai</td>
-<td>json</td>
-<td>Datos de Ticketbai</td>
-</tr>
-<tr>
-<td>print</td>
-<td>json</td>
-<td>Configuración de impresión</td>
-</tr>
-<tr>
-<td>sii</td>
-<td>json</td>
-<td>Configuración del SII</td>
-</tr>
-<tr>
-<td>administration</td>
-<td>string</td>
-<td>Administración</td>
-</tr>
-<tr>
-<td>company</td>
-<td>json</td>
-<td>Datos de la empresa</td>
-</tr>
-<tr>
-<td>eInvoice</td>
-<td>boolean</td>
-<td>Factura electrónica</td>
-</tr>
-</tbody></table>
-<h2 id='guardar-configuracion'>Guardar configuración</h2>
-<p>Guardar la configuración del usuario de facturas.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>
-<span class="c"># El servicio 'invoice/configuration' es una llamada POST</span>
-curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoice/configuration"</span>
- <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
- <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
-</code></pre></div>
-<blockquote>
-<p>Ejemplo de JSON de respuesta:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"print"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"border"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contactData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"footer"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"detailed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"adjust"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"legal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De conformidad con la Ley Orgánica 15/1999, le informamos que sus datos se hallan incorporados a un fichero titularidad de CAPSULE CORP. con la finalidad de cumplir con nuestra relación comercial. Puede ejercer los derechos de acceso, rectificación, cancelación y oposición en cualquier momento, mediante escrito, acompañado de copia de documento oficial que le identifique, dirigido a CAPSULE CORP., CALLE FALSA, 123"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"titleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxBorderColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#808080"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLACK_AND_WHITE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxTitleBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxTitleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxBodyBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"textColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"customerBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#E7E7E7"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"recordData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"sii"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"autosend"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"includeDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"registryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tax"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"surcharge"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"withholding"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"documentType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIF"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"document"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B12345678"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"eInvoice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"documentCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"nationality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"vatAccrualPayment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulma@capsule.es"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"domainType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFFICE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="mi">3195</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"capsule.aonsolutions.net"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"enableHeredity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAPSULE CORP."</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7138</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"domainManagement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxDefinedUsers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"parentId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"legalPerson"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAPSULE CORP."</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAPSULE"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">804414</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"eInvoice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Ejemplo de JSON de respuesta:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"tbai"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"print"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"border"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contactData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"footer"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"detailed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"adjust"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"legal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De conformidad con la Ley Orgánica 15/1999, le informamos que sus datos se hallan incorporados a un fichero titularidad de CAPSULE CORP. con la finalidad de cumplir con nuestra relación comercial. Puede ejercer los derechos de acceso, rectificación, cancelación y oposición en cualquier momento, mediante escrito, acompañado de copia de documento oficial que le identifique, dirigido a CAPSULE CORP., CALLE FALSA, 123"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"titleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxBorderColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#808080"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLACK_AND_WHITE"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxTitleBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxTitleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"boxBodyBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"textColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"customerBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#E7E7E7"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"recordData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"sii"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"autosend"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"includeDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"registryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tax"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"administration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMMON_TERRITORY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"eInvoice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-8'>HTTP Request</h3>
-<p><code>POST https://aon.solutions/ms/api/invoice/configuration</code></p>
-<h3 id='parametros-8'>Parámetros</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>tbai</td>
-<td>json</td>
-<td>Datos de Ticketbai</td>
-</tr>
-<tr>
-<td>print</td>
-<td>json</td>
-<td>Configuración de impresión</td>
-</tr>
-<tr>
-<td>sii</td>
-<td>json</td>
-<td>Configuración del SII</td>
-</tr>
-<tr>
-<td>administration</td>
-<td>string</td>
-<td>Administración</td>
-</tr>
-<tr>
-<td>company</td>
-<td>json</td>
-<td>Datos de la empresa</td>
-</tr>
-<tr>
-<td>eInvoice</td>
-<td>boolean</td>
-<td>Factura electrónica</td>
-</tr>
-</tbody></table>
-<h3 id='respuesta-6'>Respuesta</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>tbai</td>
-<td>json</td>
-<td>Datos de Ticketbai</td>
-</tr>
-<tr>
-<td>print</td>
-<td>json</td>
-<td>Configuración de impresión</td>
-</tr>
-<tr>
-<td>sii</td>
-<td>json</td>
-<td>Configuración del SII</td>
-</tr>
-<tr>
-<td>administration</td>
-<td>string</td>
-<td>Administración</td>
-</tr>
-<tr>
-<td>eInvoice</td>
-<td>boolean</td>
-<td>Factura electrónica</td>
-</tr>
-</tbody></table>
-<h2 id='obtener-configuracion-de-impresion'>Obtener configuración de impresión</h2>
-<p>Obtención de la configuración impresión de facturas del usuario.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>
-<span class="c"># El servicio 'invoice/print_configuration' es una llamada GET</span>
-curl <span class="nt">--request</span> GET <span class="s2">"https://aon.solutions/ms/api/invoice/print_configuration"</span>
- <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
- <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
-</code></pre></div>
-<blockquote>
-<p>Ejemplo de JSON de respuesta:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"border"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"contactData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"footer"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"detailed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"adjust"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"legal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De conformidad con la Ley Orgánica 15/1999, le informamos que sus datos se hallan incorporados a un fichero titularidad de CAPSULE CORP. con la finalidad de cumplir con nuestra relación comercial. Puede ejercer los derechos de acceso, rectificación, cancelación y oposición en cualquier momento, mediante escrito, acompañado de copia de documento oficial que le identifique, dirigido a CAPSULE CORP., CALLE FALSA, 123"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"titleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxBorderColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#808080"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLACK_AND_WHITE"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxTitleBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxTitleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxBodyBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"textColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"customerBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#E7E7E7"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"recordData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-9'>HTTP Request</h3>
-<p><code>GET https://aon.solutions/ms/api/invoice/configuration</code></p>
-<h3 id='parametros-9'>Parámetros</h3>
-<p>No requiere</p>
-<h3 id='respuesta-7'>Respuesta</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>border</td>
-<td>number</td>
-<td>Tipo de borde</td>
-</tr>
-<tr>
-<td>contractData</td>
-<td>boolean</td>
-<td>Datos de contrato</td>
-</tr>
-<tr>
-<td>footer</td>
-<td>number</td>
-<td>Altura mínima del pie</td>
-</tr>
-<tr>
-<td>active</td>
-<td>boolean</td>
-<td>Activo</td>
-</tr>
-<tr>
-<td>language</td>
-<td>string</td>
-<td>Idioma</td>
-</tr>
-<tr>
-<td>detailed</td>
-<td>boolean</td>
-<td>Detallada</td>
-</tr>
-<tr>
-<td>adjust</td>
-<td>boolean</td>
-<td>Ajustar</td>
-</tr>
-<tr>
-<td>background</td>
-<td>boolean</td>
-<td>Fondo</td>
-</tr>
-<tr>
-<td>legal</td>
-<td>string</td>
-<td>Aviso legal</td>
-</tr>
-<tr>
-<td>header</td>
-<td>number</td>
-<td>Altura mínima del encabezado</td>
-</tr>
-<tr>
-<td>logo</td>
-<td>boolean</td>
-<td>Logo de empresa</td>
-</tr>
-<tr>
-<td>company</td>
-<td>boolean</td>
-<td>Compañía</td>
-</tr>
-<tr>
-<td>theme</td>
-<td>json</td>
-<td>Tema</td>
-</tr>
-<tr>
-<td>recordData</td>
-<td>boolean</td>
-<td>Datos de registro</td>
-</tr>
-</tbody></table>
-<h2 id='guardar-configuracion-de-impresion'>Guardar configuración de impresión</h2>
-<p>Guardado de la configuración impresión de facturas del usuario.</p>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>
-<span class="c"># El servicio 'invoice/print_configuration' es una llamada POST</span>
-curl <span class="nt">--request</span> POST <span class="s2">"https://aon.solutions/ms/api/invoice/print_configuration"</span>
- <span class="nt">-H</span> <span class="s2">"session_id:YOURSESSIONID"</span> <span class="nt">--data</span>
- <span class="nt">-H</span> <span class="s2">"domain_name:NOMBRE_DEL_DOMINIO"</span> <span class="nt">--data</span>
-</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"border"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"contactData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"footer"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"detailed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"adjust"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"legal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De conformidad con la Ley Orgánica 15/1999, le informamos que sus datos se hallan incorporados a un fichero titularidad de CAPSULE CORP. con la finalidad de cumplir con nuestra relación comercial. Puede ejercer los derechos de acceso, rectificación, cancelación y oposición en cualquier momento, mediante escrito, acompañado de copia de documento oficial que le identifique, dirigido a CAPSULE CORP., CALLE FALSA, 123"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"titleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxBorderColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#808080"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLACK_AND_WHITE"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxTitleBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxTitleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxBodyBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"textColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"customerBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#E7E7E7"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"recordData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Ejemplo de JSON de respuesta:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"border"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"contactData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"footer"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"detailed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"adjust"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"background"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"legal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"De conformidad con la Ley Orgánica 15/1999, le informamos que sus datos se hallan incorporados a un fichero titularidad de CAPSULE CORP. con la finalidad de cumplir con nuestra relación comercial. Puede ejercer los derechos de acceso, rectificación, cancelación y oposición en cualquier momento, mediante escrito, acompañado de copia de documento oficial que le identifique, dirigido a CAPSULE CORP., CALLE FALSA, 123"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"logo"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"titleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxBorderColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#808080"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BLACK_AND_WHITE"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxTitleBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxTitleTextColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"boxBodyBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ffffff"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"textColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#404040"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"customerBackgroundColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#E7E7E7"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nl">"recordData"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='http-request-10'>HTTP Request</h3>
-<p><code>GET https://aon.solutions/ms/api/invoice/configuration</code></p>
-<h3 id='parametros-10'>Parámetros</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>border</td>
-<td>number</td>
-<td>Tipo de borde</td>
-</tr>
-<tr>
-<td>contractData</td>
-<td>boolean</td>
-<td>Datos de contrato</td>
-</tr>
-<tr>
-<td>footer</td>
-<td>number</td>
-<td>Altura mínima del pie</td>
-</tr>
-<tr>
-<td>active</td>
-<td>boolean</td>
-<td>Activo</td>
-</tr>
-<tr>
-<td>language</td>
-<td>string</td>
-<td>Idioma</td>
-</tr>
-<tr>
-<td>detailed</td>
-<td>boolean</td>
-<td>Detallada</td>
-</tr>
-<tr>
-<td>adjust</td>
-<td>boolean</td>
-<td>Ajustar</td>
-</tr>
-<tr>
-<td>background</td>
-<td>boolean</td>
-<td>Fondo</td>
-</tr>
-<tr>
-<td>legal</td>
-<td>string</td>
-<td>Aviso legal</td>
-</tr>
-<tr>
-<td>header</td>
-<td>number</td>
-<td>Altura mínima del encabezado</td>
-</tr>
-<tr>
-<td>logo</td>
-<td>boolean</td>
-<td>Logo de empresa</td>
-</tr>
-<tr>
-<td>company</td>
-<td>boolean</td>
-<td>Compañía</td>
-</tr>
-<tr>
-<td>theme</td>
-<td>json</td>
-<td>Tema</td>
-</tr>
-<tr>
-<td>recordData</td>
-<td>boolean</td>
-<td>Datos de registro</td>
-</tr>
-</tbody></table>
-<h3 id='respuesta-8'>Respuesta</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>border</td>
-<td>number</td>
-<td>Tipo de borde</td>
-</tr>
-<tr>
-<td>contractData</td>
-<td>boolean</td>
-<td>Datos de contrato</td>
-</tr>
-<tr>
-<td>footer</td>
-<td>number</td>
-<td>Altura mínima del pie</td>
-</tr>
-<tr>
-<td>active</td>
-<td>boolean</td>
-<td>Activo</td>
-</tr>
-<tr>
-<td>language</td>
-<td>string</td>
-<td>Idioma</td>
-</tr>
-<tr>
-<td>detailed</td>
-<td>boolean</td>
-<td>Detallada</td>
-</tr>
-<tr>
-<td>adjust</td>
-<td>boolean</td>
-<td>Ajustar</td>
-</tr>
-<tr>
-<td>background</td>
-<td>boolean</td>
-<td>Fondo</td>
-</tr>
-<tr>
-<td>legal</td>
-<td>string</td>
-<td>Aviso legal</td>
-</tr>
-<tr>
-<td>header</td>
-<td>number</td>
-<td>Altura mínima del encabezado</td>
-</tr>
-<tr>
-<td>logo</td>
-<td>boolean</td>
-<td>Logo de empresa</td>
-</tr>
-<tr>
-<td>company</td>
-<td>boolean</td>
-<td>Compañía</td>
-</tr>
-<tr>
-<td>theme</td>
-<td>json</td>
-<td>Tema</td>
-</tr>
-<tr>
-<td>recordData</td>
-<td>boolean</td>
-<td>Datos de registro</td>
-</tr>
-</tbody></table>
-
-<p>La misma que los parámetros en caso de que se haya grabado correctamente.</p>
 <h1 id='fiscal'>Fiscal</h1>
 <p>Métodos para la obtención de documentos de carácter fiscal.</p>
 <h2 id='obtener-modelos-fiscales'>Obtener modelos fiscales</h2>
