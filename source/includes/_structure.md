@@ -23,7 +23,6 @@ JSON que nos llega en la **respuesta** que contiene el tipo de fichero y la url 
     Ahora mismo solo hace referencia a <a href="#obtener-factura">obtener factura</a> y <a href="#aceptar-factura">aceptar factura</a> del apartado <a href="#facturacion">facturación</a>.
 </aside>
 
-## Estructura respuesta finances
 ## Estructura respuesta de vencimiento (finance)
 ```json
 "finances": [
