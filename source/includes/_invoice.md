@@ -162,16 +162,24 @@ curl --request GET "https://aon.solutions/ms/api/invoices/:id"
     "id": 1295807,
     "finances": [
         {
-            "amount": 322.68,
-            "paymethod": 3,
-            "domain": 7138,
-            "due_date": "2022-03-28",
-            "id": 1302213
+            "id"            : 1302213,
+            "domain"        : 7138,
+            "amount"        : 322.68,
+            "due_date"      : "2022-03-28",
+            "paymethod"     : 3,
+            "paymethodName" : "TARJETA",
+            "paymethodType" : "CREDIT_CARD",
+            "bank_account"  : "ES7320386623844751152119"
         }
     ],
-    "category": "705012200",
+    "category"   : "705012200",
     "transaction": "NAC",
-    "status": "scored"
+    "status"     : "scored",
+    "file"       : {
+        "content_type" : "application/pdf",
+        "url"          : "https://aon.solutions/ms/api/file/eyJkb21haW5faWQiOjc...",
+        "path"         : "ms/api/file/eyJkb21haW5faWQiOjc..."
+    }
 }
 ```
 
@@ -187,38 +195,38 @@ curl --request GET "https://aon.solutions/ms/api/invoices/:id"
 
 ### Respuesta
 
-| Name |  Type  | Description |
-|------|--------|-------------|
-| id                | number    | Identificador de la factura. |
-| domain            | number    | Identificador del dominio al que pertenece la factura. |
-| type              | string    | Tipo de la factura. valores permitidos: emitida, recibida, ticket. |
-| serie             | string    | Serie de la factura. |
-| number            | number    | Número de factura. |
-| reference         | string    | Referencia de la factura. |
-| date              | date      | Fecha de emisión la factura. |
-| transaction       | string    | Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP. |
-| category          | string    | Categoría de la factura. (Cuenta Contable de la factura). |
-| total             | number    | Importe total de la factura. |
-| sender            | object    | Información del emisor de la factura. |
-| receiver          | object    | Información del emisor de la factura. |
-| investment        | boolean   | Indica si es una factura de inversión. |
-| service           | boolean   | Indica si es una factura de servicio. |
-| withholding       | boolean   | Indica si la factura tiene Retención. |
-| withholdingFarmer | boolean   | Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca. |
-| vatAccrualPayment | boolean   | Indica si la factura tiene régimen especial de criterio de caja. |
-| surcharge         | boolean   | Indica si la factura tiene Recargo de equivalencia. |
-| rectified         | boolean   | Indica si es una factura rectificada. |
-| rectifier         | boolean   | Indica si es una factura rectificativa. |
-| rectificationInvoice | number | Identificador de la factura rectificada o de la factura rectificativa. |
-| comments          | string    | Comentarios de la factura. |
-| remarks           | string    | Observaciones de la factura. |
-| activity          | object    | Actividad de la factura. |
-| workplace         | string    | Centro de trabajo de la factura. |
-| status            | string    | Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored |
-| taxes             | array     | Resumen de los impuestos de la factura. |
-| details           | array     | Detalles de la factura. |
-| finances          | array     | Vencimientos de la factura. |
-
+| Name                  | Type                                                  | Description                                                                       |
+|-----------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------|
+| id                    | number                                                | Identificador de la factura. |
+| domain                | number                                                | Identificador del dominio al que pertenece la factura. |
+| type                  | string                                                | Tipo de la factura. valores permitidos: emitida, recibida, ticket. |
+| serie                 | string                                                | Serie de la factura. |
+| number                | number                                                | Número de factura. |
+| reference             | string                                                | Referencia de la factura. |
+| date                  | date                                                  | Fecha de emisión la factura. |
+| transaction           | string                                                | Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP. |
+| category              | string                                                | Categoría de la factura. (Cuenta Contable de la factura). |
+| total                 | number                                                | Importe total de la factura. |
+| sender                | object                                                | Información del emisor de la factura. |
+| receiver              | object                                                | Información del emisor de la factura. |
+| investment            | boolean                                               | Indica si es una factura de inversión. |
+| service               | boolean                                               | Indica si es una factura de servicio. |
+| withholding           | boolean                                               | Indica si la factura tiene Retención. |
+| withholdingFarmer     | boolean                                               | Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca. |
+| vatAccrualPayment     | boolean                                               | Indica si la factura tiene régimen especial de criterio de caja. |
+| surcharge             | boolean                                               | Indica si la factura tiene Recargo de equivalencia. |
+| rectified             | boolean                                               | Indica si es una factura rectificada. |
+| rectifier             | boolean                                               | Indica si es una factura rectificativa. |
+| rectificationInvoice  | number                                                | Identificador de la factura rectificada o de la factura rectificativa. |
+| comments              | string                                                | Comentarios de la factura. |
+| remarks               | string                                                | Observaciones de la factura. |
+| activity              | object                                                | Actividad de la factura. |
+| workplace             | string                                                | Centro de trabajo de la factura. |
+| status                | string                                                | Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored |
+| taxes                 | array                                                 | Resumen de los impuestos de la factura. |
+| details               | array                                                 | Detalles de la factura. |
+| finances              | [array](#estructura-respuesta-de-vencimiento-finance) | Vencimientos de la factura. |
+| file                  | [JSON](#estructura-respuesta-file)                    | Contiene el tipo de fichero y la url para descargar el fichero. |
 
 ## Crear factura
 Crear una factura
@@ -872,7 +880,12 @@ curl --request POST "https://aon.solutions/ms/api/invoices/accept"
         }
     ],
     "transaction": "NAC",
-    "status": "pending"
+    "status": "pending",
+    "file"       : {
+        "content_type" : "application/pdf",
+        "url"          : "https://aon.solutions/ms/api/file/eyJkb21haW5faWQiOjc...",
+        "path"         : "ms/api/file/eyJkb21haW5faWQiOjc..."
+    }
 }
 ```
 
@@ -917,38 +930,38 @@ curl --request POST "https://aon.solutions/ms/api/invoices/accept"
 
 ### Respuesta
 
-| Name |  Type  | Description |
-|------|--------|-------------|
-| id                | number    | Identificador de la factura. |
-| domain            | number    | Identificador del dominio al que pertenece la factura. |
-| type              | string    | Tipo de la factura. valores permitidos: emitida, recibida, ticket. |
-| serie             | string    | Serie de la factura. |
-| number            | number    | Número de factura. |
-| reference         | string    | Referencia de la factura. |
-| date              | date      | Fecha de emisión la factura. |
-| transaction       | string    | Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP. |
-| category          | string    | Categoría de la factura. (Cuenta Contable de la factura). |
-| total             | number    | Importe total de la factura. |
-| sender            | object    | Información del emisor de la factura. |
-| receiver          | object    | Información del emisor de la factura. |
-| investment        | boolean   | Indica si es una factura de inversión. |
-| service           | boolean   | Indica si es una factura de servicio. |
-| withholding       | boolean   | Indica si la factura tiene Retención. |
-| withholdingFarmer | boolean   | Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca. |
-| vatAccrualPayment | boolean   | Indica si la factura tiene régimen especial de criterio de caja. |
-| surcharge         | boolean   | Indica si la factura tiene Recargo de equivalencia. |
-| rectified         | boolean   | Indica si es una factura rectificada. |
-| rectifier         | boolean   | Indica si es una factura rectificativa. |
-| rectificationInvoice | number | Identificador de la factura rectificada o de la factura rectificativa. |
-| comments          | string    | Comentarios de la factura. |
-| remarks           | string    | Observaciones de la factura. |
-| activity          | object    | Actividad de la factura. |
-| workplace         | string    | Centro de trabajo de la factura. |
-| status            | string    | Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored |
-| taxes             | array     | Resumen de los impuestos de la factura. |
-| details           | array     | Detalles de la factura. |
-| finances          | array     | Vencimientos de la factura. |
-
+| Name                  |  Type                                     | Description                                                                       |
+|-----------------------|-------------------------------------------|-----------------------------------------------------------------------------------|
+| id                    | number                                    | Identificador de la factura. |
+| domain                | number                                    | Identificador del dominio al que pertenece la factura. |
+| type                  | string                                    | Tipo de la factura. valores permitidos: emitida, recibida, ticket. |
+| serie                 | string                                    | Serie de la factura. |
+| number                | number                                    | Número de factura. |
+| reference             | string                                    | Referencia de la factura. |
+| date                  | date                                      | Fecha de emisión la factura. |
+| transaction           | string                                    | Tipo de transacción de la factura. valores permitidos: NAC, INTR, EXTR, CCM, ISP. |
+| category              | string                                    | Categoría de la factura. (Cuenta Contable de la factura). |
+| total                 | number                                    | Importe total de la factura. |
+| sender                | object                                    | Información del emisor de la factura. |
+| receiver              | object                                    | Información del emisor de la factura. |
+| investment            | boolean                                   | Indica si es una factura de inversión. |
+| service               | boolean                                   | Indica si es una factura de servicio. |
+| withholding           | boolean                                   | Indica si la factura tiene Retención. |
+| withholdingFarmer     | boolean                                   | Indica si la factura tiene régimen especial de agricultura, ganaderia y pesca. |
+| vatAccrualPayment     | boolean                                   | Indica si la factura tiene régimen especial de criterio de caja. |
+| surcharge             | boolean                                   | Indica si la factura tiene Recargo de equivalencia. |
+| rectified             | boolean                                   | Indica si es una factura rectificada. |
+| rectifier             | boolean                                   | Indica si es una factura rectificativa. |
+| rectificationInvoice  | number                                    | Identificador de la factura rectificada o de la factura rectificativa. |
+| comments              | string                                    | Comentarios de la factura. |
+| remarks               | string                                    | Observaciones de la factura. |
+| activity              | object                                    | Actividad de la factura. |
+| workplace             | string                                    | Centro de trabajo de la factura. |
+| status                | string                                    | Estado de la factura. valores permitidos: inbox, rejected, draft, pending, scored |
+| taxes                 | array                                     | Resumen de los impuestos de la factura. |
+| details               | array                                     | Detalles de la factura. |
+| finances              | array                                     | Vencimientos de la factura. |
+| file                  | [JSON](#estructura-respuesta-file)        | Contiene el tipo de fichero y la url para descargar el fichero. |
 
 ## Eliminar factura
 Eliminación de una factura

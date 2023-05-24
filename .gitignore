@@ -26,5 +26,3 @@ doc/
 # Vagrant artifacts
 ubuntu-*-console.log
 nbproject/
-/apidoc/nbproject/private/
-/nbproject/private/

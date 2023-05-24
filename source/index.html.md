@@ -19,6 +19,7 @@ includes:
   - delivery
   - customers
   - targets
+  - structure 
 
 search: true
 
@@ -30,7 +31,6 @@ meta:
 ---
 
 # Introducción
-
 ¡Bienvenido a la API de Aon Solutions!
 
 La API de Aon Solutions está estructurada siguiendo los fundamentos de una API RESTful. Todas las respuestas, incluyendo las respuestas de errores, devuelven un JSON. En este documento podrás encontrar los diferentes servicios que ofrecemos para visualizar y gestionar las principales entidades de Aon Solutions.
