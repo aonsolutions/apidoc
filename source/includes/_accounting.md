@@ -50,7 +50,7 @@ curl --request POST "https://aon.solutions/ms/api/accounting/periods"
 | Name |  Type  | Description |
 |------|--------|-------------|
 | domain      | number | Identificador del dominio de la empresa  |
-| domainName  | string | Nombre del dominio de la empreasa        |
+| domainName  | string | Nombre del dominio de la empresa         |
 | user        | string | Nombre de usuario                        |
 
 ### Respuesta
@@ -223,7 +223,7 @@ curl --request POST "https://aon.solutions/ms/api/accounting/pyg"
 | Name |  Type  | Description |
 |------|--------|-------------|
 | domain      | number  | Identificador del dominio de la empresa   |
-| domainName  | string  | Nombre del dominio de la empreasa         |
+| domainName  | string  | Nombre del dominio de la empresa          |
 | user        | string  | Nombre de usuario                         |
 | level       | number  | Nivel de detalle (posibles:[1,2,3,4,5,9]) |
 | byMonth     | boolean | Agrupado por meses                        |
